@@ -4,7 +4,7 @@
 import json
 
 from ForMark.ForException import exception_return_decorator
-from ForMark.ForLog import logger_error
+from ForMark.ForLog import ForLog
 
 
 def str_2_file_type(url):
@@ -43,7 +43,7 @@ def str_to_int(s, default=0):
     try:
         return int(s)
     except Exception as e:
-        logger_error(e)
+        ForLog.logger_error(e)
         return default
 
 

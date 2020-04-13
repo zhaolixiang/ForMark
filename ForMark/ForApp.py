@@ -4,11 +4,12 @@ import pymongo
 import pymysql
 from bson import ObjectId
 from flask import Flask, g, request, session
+from flask_cors import CORS
 from mongoengine import connect
 
+from ForMark.ForLog import ForLog
 from ForMark.ForPath import get_root_path
 from ForMark.flask_session import Session
-from ForMark.for_log import ForLog
 import os
 
 from ForMark.model.foot import Foot
@@ -17,7 +18,7 @@ from ForMark.model.session import Session as SessionDB
 pymysql.install_as_MySQLdb()
 
 
-class MarkTools():
+class ForApp():
     def __init__(self, import_name, MONGO_HOST_URL, secret_key, log_folder=None, root_path=None):
         self.import_name = import_name
         self.log_folder = log_folder
@@ -30,6 +31,7 @@ class MarkTools():
         ForLog(os.path.join(self.root_path, log_folder))
 
         app = Flask(__name__)
+        CORS(app, supports_credentials=True)  # 设置跨域
         # json支持中文显示
         app.config['JSON_AS_ASCII'] = False
         app.secret_key = secret_key

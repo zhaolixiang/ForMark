@@ -28,3 +28,4 @@ class ForLog(Singleton):
     @classmethod
     def logger_error(cls,*msg):
         logger.error(msg)
+

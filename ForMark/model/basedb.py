@@ -4,4 +4,5 @@ from mongoengine import DynamicDocument, ObjectIdField, DateTimeField, StringFie
 
 
 class BaseDb(DynamicDocument):
+    pass
 

@@ -1,7 +1,7 @@
 """
 异常处理
 """
-from ForMark.ForLog import logger_error
+from ForMark.ForLog import ForLog
 
 
 def exception_return_decorator(result):
@@ -16,7 +16,7 @@ def exception_return_decorator(result):
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                logger_error(func, e)
+                ForLog.show(func, e)
                 return result
 
         return inner
