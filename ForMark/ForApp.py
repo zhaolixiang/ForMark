@@ -53,6 +53,7 @@ class ForApp():
         @app.before_request
         def before_request():
             g.request_start_time = datetime.datetime.now()
+            ForLog.show("g.request_start_time", g.request_start_time)
             # request.json 只能够接受方法为POST、Body为raw，header 内容为 application/json类型的数据：
             # print(request.json if request.method == "POST" else request.args)
             # g.params = request.json if request.method in [
@@ -70,6 +71,8 @@ class ForApp():
                     params.update(request.json)
             if request.form:
                 params.update(request.form.to_dict(flat=True))
+            if request.content_type=="application/json":
+                params.update(request.json)
             g.params = params
             ip = request.remote_addr
             # print("请求头",request.headers)
