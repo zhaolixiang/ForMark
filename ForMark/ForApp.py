@@ -56,10 +56,9 @@ class ForApp():
             ForLog.show("g.request_start_time", g.request_start_time)
             # request.json 只能够接受方法为POST、Body为raw，header 内容为 application/json类型的数据：
             # print(request.json if request.method == "POST" else request.args)
-            params = {}
-            params = request.json if request.method in [
+            params = request.json if request.method.upper() in [
                 "POST", "PUT"] else request.args
-            if g.params is None and request.method == 'POST' and request.files:
+            if params is None and request.method == 'POST' and request.files:
                 params = request.form
 
             # if request.args:
@@ -72,6 +71,8 @@ class ForApp():
             #         params.update(request.json)
             # if request.form:
             #     params.update(request.form.to_dict(flat=True))
+            if params is None:
+                params = {}
             if request.content_type == "application/json":
                 params.update(request.json)
             g.params = params
