@@ -56,22 +56,23 @@ class ForApp():
             ForLog.show("g.request_start_time", g.request_start_time)
             # request.json 只能够接受方法为POST、Body为raw，header 内容为 application/json类型的数据：
             # print(request.json if request.method == "POST" else request.args)
-            # g.params = request.json if request.method in [
-            #     "POST", "PUT"] else request.args
-            # if g.params is None and request.method == 'POST' and request.files:
-            #     g.params = request.form
             params = {}
-            if request.args:
-                params.update(request.args.to_dict(flat=True))
-            if request.method != 'GET' and request.json:
-                if type(request.json) == type([]):
-                    for x in request.json:
-                        params.update(x)
-                else:
-                    params.update(request.json)
-            if request.form:
-                params.update(request.form.to_dict(flat=True))
-            if request.content_type=="application/json":
+            params = request.json if request.method in [
+                "POST", "PUT"] else request.args
+            if g.params is None and request.method == 'POST' and request.files:
+                params = request.form
+
+            # if request.args:
+            #     params.update(request.args.to_dict(flat=True))
+            # if request.method != 'GET' and request.json:
+            #     if type(request.json) == type([]):
+            #         for x in request.json:
+            #             params.update(x)
+            #     else:
+            #         params.update(request.json)
+            # if request.form:
+            #     params.update(request.form.to_dict(flat=True))
+            if request.content_type == "application/json":
                 params.update(request.json)
             g.params = params
             ip = request.remote_addr
@@ -104,8 +105,8 @@ class ForApp():
             # 请求结束时间：
             foot.request_end_time = datetime.datetime.now()
             foot.cookies = request.cookies
-            ForLog.show("请求的cookies",request.cookies)
-            ForLog.show("请求的cookies type",type(request.cookies))
+            ForLog.show("请求的cookies", request.cookies)
+            ForLog.show("请求的cookies type", type(request.cookies))
             headers_before = request.headers
             if headers_before:
                 headers = {}
@@ -123,6 +124,7 @@ class ForApp():
         @app.teardown_request
         def teardown_request(error):
             g.error = error
-        ForLog.show("连接mongodb数据库",MONGO_HOST_URL)
+
+        ForLog.show("连接mongodb数据库", MONGO_HOST_URL)
         connect(host=MONGO_HOST_URL)
         self.app = app
