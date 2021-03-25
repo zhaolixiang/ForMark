@@ -170,7 +170,7 @@ msgpack==0.6.2
 Naked==0.1.31
 pycrypto==2.6.1
 python-editor==1.0.4
-PyYAML==5.3.1
+PyYAML==5.4
 shellescape==3.8.1
 SQLAlchemy==1.3.12
 WTForms==2.2.1
