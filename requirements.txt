@@ -9,7 +9,7 @@ click==7.1.1
 crcmod==1.7
 docutils==0.16
 Flask==1.1.1
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 h11==0.8.1
 h2==3.2.0
 hpack==3.0.0
