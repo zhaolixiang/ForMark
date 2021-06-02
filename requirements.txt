@@ -50,7 +50,7 @@ tls-sig-api-v2==1.1
 tqdm==4.44.0
 twine==3.1.1
 ujson==2.0.3
-urllib3==1.25.8
+urllib3==1.26.5
 uvloop==0.14.0
 webencodings==0.5.1
 websockets==8.1
